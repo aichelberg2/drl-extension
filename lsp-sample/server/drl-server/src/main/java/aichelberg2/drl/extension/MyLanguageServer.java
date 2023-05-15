@@ -14,15 +14,13 @@ public class MyLanguageServer implements LanguageServer
   public void connect(LanguageClient client)
   {
     this.client = client;
+    this.textService = new MyTextDocumentService(client);
+    this.workspaceService = new MyWorkspaceService();
   }
-
 
   @Override
   public CompletableFuture<InitializeResult> initialize(InitializeParams params)
   {
-    this.textService = new MyTextDocumentService(client);
-    this.workspaceService = new MyWorkspaceService();
-
     ServerCapabilities capabilities = new ServerCapabilities();
     capabilities.setTextDocumentSync(TextDocumentSyncKind.Full);
     InitializeResult result = new InitializeResult(capabilities);
