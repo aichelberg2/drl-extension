@@ -4,4 +4,7 @@ client/server
 .vscode-test
 
 # gradle
-server/drl-server/bin/
+server/drl-server/.gradle/
+server/drl-server/.idea/
+server/drl-server/build/*
+!server/drl-server/build/launch4j/server.exe

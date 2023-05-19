@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '7.1.0'
+    id 'edu.sc.seis.launch4j' version '2.5.0'
 }
 
 group 'org.example'
@@ -31,3 +32,14 @@ shadowJar {
     }
 }
 
+launch4j {
+    headerType = 'console'
+    mainClassName = 'aichelberg2.drl.extension.Main'
+    outfile = 'server.exe'
+    jar = "${buildDir}/libs/drl-server-${version}.jar"
+}
+
+// Ensures launch4j runs after shadowJar
+tasks.named('createExe') {
+    dependsOn shadowJar
+}

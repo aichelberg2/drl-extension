@@ -2,11 +2,12 @@
 	"name": "drl-extension",
 	"description": "Drools Rule Language support for Visual Studio Code",
 	"author": "aichelberg2",
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/aichelberg2/drl-extension.git"
 	},
+	"icon": "icon.png",
 	"publisher": "aichelberg2",
 	"categories": [],
 	"keywords": [
@@ -15,9 +16,7 @@
 	"engines": {
 		"vscode": "^1.75.0"
 	},
-	"activationEvents": [
-		"onLanguage:drl"
-	],
+	"activationEvents": [],
 	"main": "./client/out/extension",
 	"contributes": {
 		"languages": [
