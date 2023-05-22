@@ -37,6 +37,9 @@ launch4j {
     mainClassName = 'aichelberg2.drl.extension.Main'
     outfile = 'server.exe'
     jar = "${buildDir}/libs/drl-server-${version}.jar"
+    bundledJrePath = 'jdk'
+    bundledJre64Bit = true
+    jreMinVersion = '11'
 }
 
 // Ensures launch4j runs after shadowJar

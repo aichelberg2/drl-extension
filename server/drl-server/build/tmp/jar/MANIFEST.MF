@@ -1,3 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: aichelberg2.drl.extension.Main
 
