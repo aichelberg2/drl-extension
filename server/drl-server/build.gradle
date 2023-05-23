@@ -1,48 +1,72 @@
 plugins {
-    id 'java'
-    id 'com.github.johnrengelman.shadow' version '7.1.0'
-    id 'edu.sc.seis.launch4j' version '2.5.0'
+  id 'java'
+  id 'com.github.johnrengelman.shadow' version '7.1.0'
+  id 'edu.sc.seis.launch4j' version '2.5.0'
 }
 
 group 'org.example'
 version '1.0'
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    implementation 'org.eclipse.lsp4j:org.eclipse.lsp4j:0.11.0'
-    implementation 'org.drools:drools-compiler:7.59.0.Final'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+  implementation 'org.eclipse.lsp4j:org.eclipse.lsp4j:0.11.0'
+  implementation 'org.drools:drools-compiler:7.59.0.Final'
 }
 
 test {
-    useJUnitPlatform()
+  useJUnitPlatform()
 }
 
 shadowJar {
-    archiveBaseName.set('drl-server')
-    archiveVersion.set('1.0')
-    archiveClassifier.set('')
+  archiveBaseName.set('drl-server')
+  archiveVersion.set('1.0')
+  archiveClassifier.set('')
 
-    manifest {
-        attributes 'Main-Class': 'aichelberg2.drl.extension.Main'
-    }
+  manifest {
+    attributes 'Main-Class': 'aichelberg2.drl.extension.Main'
+  }
 }
 
-launch4j {
-    headerType = 'console'
-    mainClassName = 'aichelberg2.drl.extension.Main'
-    outfile = 'server.exe'
-    jar = "${buildDir}/libs/drl-server-${version}.jar"
-    bundledJrePath = 'jdk'
-    bundledJre64Bit = true
-    jreMinVersion = '11'
+tasks.register('buildExe', Exec) {
+  dependsOn(shadowJar)
+  commandLine 'jpackage',
+          '--name',
+          'server',
+          '--main-jar',
+          'drl-server-1.0.jar',
+          '--main-class',
+          'aichelberg2.drl.extension.Main',
+          '--type',
+          'app-image',
+          '--input',
+          'build/libs',
+          '--add-launcher',
+          'run_server=src/main/resources/console.properties'
 }
 
-// Ensures launch4j runs after shadowJar
-tasks.named('createExe') {
-    dependsOn shadowJar
-}
+
+//tasks.register('executeCommand', Exec) {
+//    dependsOn(shadowJar)
+//    commandLine 'java',
+//            '-jar',
+//            '.\\packr-all-4.0.0.jar',
+//            '--platform',
+//            'windows64',
+//            '--jdk',
+//            'jdk-13.0.1.zip',
+//            '--executable',
+//            'server',
+//            '--classpath',
+//            'build/libs/drl-server-1.0.jar',
+//            '--mainclass',
+//            'aichelberg2.drl.extension.Main',
+//            '--output',
+//            'build/exe',
+//            '--useZgcIfSupportedOs'
+//
+//}

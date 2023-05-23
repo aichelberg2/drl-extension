@@ -6,5 +6,7 @@ client/server
 # gradle
 server/drl-server/.gradle/
 server/drl-server/.idea/
-server/drl-server/build/*
-!server/drl-server/build/launch4j/server.exe
+server/drl-server/build
+server/drl-server/server
+server/drl-server/bin
+!server/drl-server/server/run_server.exe

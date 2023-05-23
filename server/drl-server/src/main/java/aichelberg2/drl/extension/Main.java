@@ -3,6 +3,8 @@ package aichelberg2.drl.extension;
 import org.eclipse.lsp4j.jsonrpc.Launcher;
 import org.eclipse.lsp4j.services.LanguageClient;
 
+import java.util.Scanner;
+
 public class Main
 {
   public static void main(String[] args)

@@ -19,7 +19,7 @@ export function activate(context: ExtensionContext) {
 	// The server is implemented in node
 	const path = require('path');
 	let workspacePath = path.normalize(__dirname + '\\..\\..');
-	let serverExe = workspacePath + '\\server\\drl-server\\build\\launch4j\\server.exe';
+	let serverExe = path.join(workspacePath, "server", "drl-server", "server", "run_server.exe");
 
 	// If the extension is launched in debug mode then the debug server options are used
 	// Otherwise the run options are used
